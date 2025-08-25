@@ -1,9 +1,11 @@
+from flask import render_template
+
 from .. import app
 from ..models.users import User
 
 @app.route('/')
 def home():
-    return 'Hello World'
+    return render_template('index.html')
 
 @app.route('/about')
 def about():
