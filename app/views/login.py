@@ -1,12 +1,11 @@
 
 from flask import render_template, request, session, redirect
 
-from .. import app, db
+from .. import app, db, bcrypt
 from ..models.users import User
 
 def password_hash_fn(password: str) -> str:
-    # Placeholder for password hashing function
-    return password  # In production, use a proper hashing function
+    return bcrypt.generate_password_hash(password).decode('utf-8')
 
 @app.route('/login', methods=['GET'])
 def login_form():
@@ -38,7 +37,7 @@ def login():
 
     session['user_id'] = user.id
 
-    return f'ID: {user.id}, Username: {user.name}, Email: {user.email}';
+    return f'ID: {user.id}, Username: {user.name}, Email: {user.email}'
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -53,9 +52,9 @@ def register():
 
     if existing_user is not None:
         return 'Email already registered', 400
-     
-    new_user = User(name=name, email=email, password_hash=password_hash) # pyright : ignore
+
+    new_user = User(name=name, email=email, grade=grade, class_name=class_name, student_id=student_id, password_hash=password_hash) # type: ignore
     db.session.add(new_user)
     db.session.commit()
 
-    return f'User {new_user.name} registered successfully with ID {new_user.id}';
+    return f'User {new_user.name} registered successfully with ID {new_user.id}'
