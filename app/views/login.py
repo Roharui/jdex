@@ -32,7 +32,7 @@ def login():
 
     user = db.session.execute(db.select(User).filter_by(email=email)).scalar_one_or_none()
 
-    if user is None or user.password_hash != password_hash_fn(password):
+    if user is None or bcrypt.check_password_hash(user.password_hash, password) is False:
         return 'Invalid email or password', 401
 
     session['user_id'] = user.id
