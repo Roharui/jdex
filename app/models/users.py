@@ -12,6 +12,7 @@ class User(db.Model):
     grade: Mapped[str] = mapped_column(String(10), nullable=False)
     class_name: Mapped[str] = mapped_column(String(50), nullable=False)
     student_id: Mapped[str] = mapped_column(String(20), nullable=False)
+    point: Mapped[int] = mapped_column(Integer, default=0)
 
 
     def __repr__(self):
