@@ -1,10 +1,18 @@
 
+from sqlalchemy import Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
+
 from .. import db
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
+    password_hash: Mapped[str] = mapped_column(String(128), nullable=False)
+    name: Mapped[str] = mapped_column(String(100), nullable=False)
+    grade: Mapped[str] = mapped_column(String(10), nullable=False)
+    class_name: Mapped[str] = mapped_column(String(50), nullable=False)
+    student_id: Mapped[str] = mapped_column(String(20), nullable=False)
+
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User {self.email}>'
