@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+
+# 환경변수 로드
+load_dotenv()
+
 from app import app, db
 
 from app.models import *

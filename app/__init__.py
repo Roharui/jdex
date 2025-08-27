@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_bcrypt import Bcrypt
 
@@ -7,12 +9,12 @@ from sqlalchemy.orm import DeclarativeBase
 app = Flask(__name__)
 
 # 세션 관리를 위한 비밀 키 설정
-app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 bcrypt = Bcrypt(app)
 
 # SQLite 데이터베이스 설정. my_project 디렉터리에 'site.db' 파일 생성
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///example.db' 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 class Base(DeclarativeBase):
