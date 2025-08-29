@@ -96,15 +96,15 @@
     <div class="login-header">
       <h2>새로운 비밀번호 설정</h2>
     </div>
-    <form action="/login" method="POST">
+    <form action="/pw/{{uuid}}" method="POST">
       <div class="input-group email-group">
-        <input type="email" name="email" placeholder="이메일 입력" required>
+        <input type="email" name="email" placeholder="{{email}}" required readonly tabindex="-1">
       </div>
       <div class="input-group name-group">
-        <input type="email" name="email" placeholder="이름 입력" required>
+        <input type="text" name="name" placeholder="{{name}}" required readonly tabindex="-1">
       </div>
       <div class="input-group password-group">
-        <input type="password" name="password" placeholder="새로운 비밀번호 입력" required>
+        <input type="password" name="new_password" placeholder="새로운 비밀번호 입력" required>
       </div>
       <button type="submit" class="login-btn">변경</button>
     </form>
