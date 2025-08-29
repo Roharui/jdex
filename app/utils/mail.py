@@ -20,7 +20,7 @@ def send_email(to_addrs, body):
   msg = MIMEText(body)
   msg['Subject'] = "정동 익스프레스 비밀번호 설정"
   msg['From'] = my_email
-  msg['To'] = ','.join(to_addrs)
+  msg['To'] = to_addrs
 
   # 방법 2(with 사용)
   with SMTP("smtp.gmail.com") as connection:
