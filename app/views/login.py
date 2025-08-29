@@ -30,7 +30,7 @@ def login():
     user = db.session.execute(db.select(User).filter_by(email=email)).scalar_one_or_none()
 
     if user is None or bcrypt.check_password_hash(user.password_hash, password) is False:
-        return '님 꺼지셈 ㅗ', 401
+        return '<script>alert("로그인에 실패했습니다.");location.href="/login"</script>', 401
 
     session['user_id'] = user.id
 

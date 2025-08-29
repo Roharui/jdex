@@ -8,7 +8,12 @@ def home():
     if not session.get('user_id'):
         return redirect('/login')
     user = db.session.execute(db.select(User).filter_by(id=session.get('user_id'))).scalar_one_or_none()
-    return render_template('index.html', point=user.point)
+
+    user.id = None
+    user.uuid = None
+    user.password_hash = None
+
+    return render_template('index.html', user=user)
 
 @app.route('/about')
 def about():
